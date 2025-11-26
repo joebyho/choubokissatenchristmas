@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choubo Kissaten 聖誕音樂光譜</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(180deg, #0B1E3F 0%, #123765 50%, #1F4E78 100%); /* 深藍漸層背景 */
+      font-family: "Noto Sans TC", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .player-container {
+      max-width: 500px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.95); /* 白色半透明 */
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      border: 4px solid #E63946; /* 日本紅燈籠色 */
+    }
+
+    h1 {
+      color: #0B1E3F;
+      font-size: 30px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    #start-button {
+      background-color: #1E6091;
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    #start-button:hover {
+      background-color: #144E75;
+      transform: scale(1.05);
+    }
+
+    .brand-message {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #0B1E3F;
+      font-weight: 500;
+    }
+
+    /* 頂部燈籠 */
+    .lanterns {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 燈籠emoji裝飾 -->
+  <div class="lanterns">
+    ⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄⛄
+  </div>
+
+  <div class="player-container">
+    <h1>Choubo Kissaten 聖誕音樂光譜</h1>
+    <button id="start-button">▶️ 播放音樂</button>
+    <div class="brand-message">
+      在聖誕音歡樂下，與 Choubo Kissaten 一起聽見聖誕夜之旋律！
+    </div>
+  </div>
+
+  <audio id="audio-player" style="display:none;"></audio>
+
+  <script>
+    const playlist = [
+      "Choubo Christmas Song.mp3"
+    ];
+
+    const audioPlayer = document.getElementById('audio-player');
+    let currentTrack = 0;
+
+    function playTrack(index) {
+      audioPlayer.src = playlist[index];
+      audioPlayer.play();
+    }
+
+    document.getElementById('start-button').addEventListener('click', () => {
+      playTrack(currentTrack);
+      document.getElementById('start-button').style.display = 'none';
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      playTrack(currentTrack);
+    });
+  </script>
+</body>
+</html>
